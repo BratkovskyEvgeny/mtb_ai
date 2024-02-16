@@ -20,7 +20,7 @@ tg_svg: Path = icons_dir / "tg.svg"
 # --- GENERAL SETTINGS ---
 PAGE_TITLE: str = "ЦАР_Ассистент"
 PAGE_ICON: str = "🤖"
-#LANG_EN: str = "En"
+LANG_EN: str = "En"
 LANG_RU: str = "Ru"
 AI_MODEL_OPTIONS: list[str] = [
     "gpt-4-1106-preview",
