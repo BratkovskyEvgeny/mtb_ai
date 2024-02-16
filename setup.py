@@ -5,7 +5,7 @@ with open("requirements.txt") as f:
     requirements = [line.strip() for line in f.readlines() if not line.startswith("-f")]
 
 setup(
-    name="ai-talks",
+    name="MTBankAI",
     version="0.9.1",
     packages=find_packages(),
     include_package_data=True,
@@ -15,7 +15,7 @@ setup(
             "ai-talks=ai_talks.chat:run_agi",
         ],
     },
-    author="Dmitry Kosarevsky",
+    author="ЦАР",
     author_email="if.kosarevsky@gmail.com",
     description="A ChatGPT API wrapper, providing a user-friendly Streamlit web interface",
     long_description=open("README.md").read(),
