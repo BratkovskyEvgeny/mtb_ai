@@ -38,15 +38,34 @@ st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 with open(css_file) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-selected_lang = option_menu(
-    menu_title=None,
-    options=[LANG_EN, LANG_RU, ],
-    icons=["globe2", "translate"],
-    menu_icon="cast",
-    default_index=0,
-    orientation="horizontal",
-    styles=HEADER_STYLES
-)
+
+with st.sidebar:
+    selected_lang = option_menu(
+                    menu_title=None,
+                    options=[LANG_RU, ],#LANG_EN, 
+                    icons=["globe2", "translate"],
+                    menu_icon="cast",
+                    default_index=0,
+                    orientation=None,
+                    #visibility: 'hidden'
+                    
+                    styles=HEADER_STYLES)
+
+        
+    selected_lang
+
+
+st.markdown("""
+    <style>
+        section[data-testid="stSidebar"][aria-expanded="true"]{
+            display: none;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+
+
 
 # Storing The Context
 if "locale" not in st.session_state:
@@ -111,9 +130,9 @@ def run_agi():
         options=[
             st.session_state.locale.footer_option1,
             st.session_state.locale.footer_option0,
-            st.session_state.locale.footer_option2,
+           # st.session_state.locale.footer_option2,
         ],
-        icons=["info-circle", "chat-square-text", "piggy-bank"],  # https://icons.getbootstrap.com/
+        icons=["info-circle", "chat-square-text"],  # https://icons.getbootstrap.com/
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",
@@ -125,8 +144,8 @@ def run_agi():
         case st.session_state.locale.footer_option1:
             st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
             show_info(tg_svg)
-        case st.session_state.locale.footer_option2:
-            show_donates()
+        #case st.session_state.locale.footer_option2:
+            #show_donates()
         case _:
             show_info(tg_svg)
 
