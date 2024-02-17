@@ -12,7 +12,7 @@ from .helpers import render_svg
 
         
 def show_info(icon: Path) -> None:
-    #st.divider()
+    st.divider()
     #st.markdown(f"<div style='text-align: justify;'>"ЦАР-ассистента - помощника"</div>",
                 #unsafe_allow_html=True)
     #st.text("Командой ЦАР был разработан прототип ЦАР-ассистента - помощника на основе искусственного интеллекта. 
@@ -65,8 +65,8 @@ def show_donates() -> None:
         #- [CloudTips](https://pay.cloudtips.ru/p/eafa15b2)
     #""")
     #_, img_col, _ = st.columns(3)
-    #with img_col:
-        #st.image("ai_talks/assets/qr/tink.png", width=200)
+    with img_col:
+        st.image("ai_talks/assets/qr/tink.png", width=200)
     #st.divider()
     st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.donates_info}</div>",
                 unsafe_allow_html=True)
