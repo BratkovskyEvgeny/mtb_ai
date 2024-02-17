@@ -8,6 +8,7 @@ from .helpers import render_svg
 
 def show_info(icon: Path) -> None:
     st.divider()
+    st.markdown()
     #st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.responsibility_denial}</div>",
                 #unsafe_allow_html=True)
     #st.divider()
