@@ -8,7 +8,7 @@ from .helpers import render_svg
 
 def show_info(icon: Path) -> None:
     st.divider()
-    st.markdown(f"<div style='text-align: justify;'>{ЦАР-ассистента - помощника}</div>",
+    st.markdown(f"<div style='text-align: justify;'>"ЦАР-ассистента - помощника"</div>",
                 unsafe_allow_html=True)
     #st.text("Командой ЦАР был разработан прототип ЦАР-ассистента - помощника на основе искусственного интеллекта. 
         #ЦАР-ассистент успешно справляется с задачами, связанными с генерацией программного кода, код-ревью и в настоящее
