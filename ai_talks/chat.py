@@ -55,32 +55,27 @@ with st.sidebar:
     selected_lang
 
 
-st.markdown("""
-    <style>
-        section[data-testid="stSidebar"][aria-expanded="true"]{
-            display: none;
-        }
-    </style>
-    """, unsafe_allow_html=True)
+#st.markdown("""
+    #<style>
+        #section[data-testid="stSidebar"][aria-expanded="true"]{
+            #display: none;
+        #}
+    #</style>
+   # """, unsafe_allow_html=True)
 
 
 
 
-hide_streamlit_style = """  
-<style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
 
-</style>
-
-"""
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
 hide_streamlit_style = """
             <style>
             [data-testid="stToolbar"] {visibility: hidden !important;}
             footer {visibility: hidden !important;}
+            section[data-testid="stSidebar"][aria-expanded="true"]{
+            display: none;
+        }
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
