@@ -12,7 +12,7 @@ from .helpers import render_svg
 
         
 def show_info(icon: Path) -> None:
-    st.divider()
+    #st.divider()
     #st.markdown(f"<div style='text-align: justify;'>"ЦАР-ассистента - помощника"</div>",
                 #unsafe_allow_html=True)
     #st.text("Командой ЦАР был разработан прототип ЦАР-ассистента - помощника на основе искусственного интеллекта. 
@@ -31,7 +31,7 @@ def show_info(icon: Path) -> None:
     #""", unsafe_allow_html=True)
     st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.responsibility_denial}</div>",
                 unsafe_allow_html=True)
-    #st.divider()
+    st.divider()
     #st.markdown(f"project [repo on github]({REPO_URL}) waiting for your :star: | [report]({BUG_REPORT_URL}) a bug")
 
 
