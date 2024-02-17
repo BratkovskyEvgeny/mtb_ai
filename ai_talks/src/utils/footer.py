@@ -29,7 +29,7 @@ def show_info(icon: Path) -> None:
         #- {render_svg(icon)} [{st.session_state.locale.footer_channel}](https://https://t.me/Br_Evgeny)
        
     #""", unsafe_allow_html=True)
-    st.markdown('<div style="text-align: center;">Командой ЦАР был разработан прототип ЦАР-ассистента - помощника на основе искусственного интеллекта. ЦАР-ассистент успешно справляется с задачами, связанными с генерацией программного кода, код-ревью и в настоящее время обучается, как старательный студент, чтобы изучить банковские ЛПА и в дальнейшем стать экспертом по ЛПА. Мы уверены, что ЦАР-ассистент станет надежным помощником для решения рутинных задач в банке.</div>', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: justify;">Командой ЦАР был разработан прототип ЦАР-ассистента - помощника на основе искусственного интеллекта. ЦАР-ассистент успешно справляется с задачами, связанными с генерацией программного кода, код-ревью и в настоящее время обучается, как старательный студент, чтобы изучить банковские ЛПА и в дальнейшем стать экспертом по ЛПА. Мы уверены, что ЦАР-ассистент станет надежным помощником для решения рутинных задач в банке.</div>', unsafe_allow_html=True)
     #st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.responsibility_denial}</div>", unsafe_allow_html=True)
     st.divider()
     #st.markdown(f"project [repo on github]({REPO_URL}) waiting for your :star: | [report]({BUG_REPORT_URL}) a bug")
