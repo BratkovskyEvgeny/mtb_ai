@@ -23,8 +23,8 @@ def show_info(icon: Path) -> None:
     #st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.responsibility_denial}</div>",
                 #unsafe_allow_html=True)
     #st.divider()
-    #st.markdown(f"""
-         #:page_with_curl: {st.session_state.locale.footer_title}
+    st.markdown(f"""
+         :page_with_curl: {st.session_state.locale.footer_title}
        
         #- {render_svg(icon)} [{st.session_state.locale.footer_channel}](https://https://t.me/Br_Evgeny)
        
