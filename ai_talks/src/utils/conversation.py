@@ -32,21 +32,8 @@ def get_user_input():
         case _:
             show_text_input()
 
-st.markdown(
-    """
-<style>
-button {
-    height: auto;
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
-}
-</style>
-""",
-    unsafe_allow_html=True,
-)
-
 def show_chat_buttons() -> None:
-    b0, b1, b2 = st.columns([0.4,0.3,0.3])
+    b0, b1, b2 = st.columns([3,1,1])
     with b0, b1, b2:
         b0.button(label=st.session_state.locale.chat_run_btn)
         b1.button(label=st.session_state.locale.chat_clear_btn, on_click=clear_chat)
