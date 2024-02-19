@@ -118,5 +118,12 @@ def run_agi():
         orientation="horizontal",
         styles=FOOTER_STYLES
     )
-    match selected_footer
+    match selected_footer:
+        case st.session_state.locale.footer_option0:
+            main()
+
+
+if __name__ == "__main__":
+    run_agi()
+
 
