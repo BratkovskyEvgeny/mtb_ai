@@ -119,8 +119,8 @@ if "total_tokens" not in st.session_state:
 
 def main() -> None:
     c1, c2 = st.columns(2)
-    
-    with c2:
+    with c1, c2:
+        c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
         st.session_state.input_kind = c2.radio(
             label=st.session_state.locale.input_kind,
             options=(st.session_state.locale.input_kind_1, st.session_state.locale.input_kind_2),
@@ -142,10 +142,7 @@ def main() -> None:
         show_conversation()
         st.session_state.user_text = ""
     get_user_input()
-    show_chat_buttons()  
-    
-    st.sidebar.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
-
+    show_chat_buttons()
 
 
 def run_agi():
