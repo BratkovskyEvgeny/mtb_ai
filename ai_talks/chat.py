@@ -32,22 +32,20 @@ AI_MODEL_OPTIONS: list[str] = [
     #"",#gpt-3.5-turbo-16k
 ]
 
-# Определение словаря с псевдонимами
+# Определение словаря с псевдонимами моделей
 ALIAS_MAP = {
     "gpt-4-vision-preview": "mtbank-cv",
     "gpt-4": "mtbank",
 }
 
-# Преобразование списка моделей в список псевдонимов
+# Преобразование списка моделей в список псевдонимов для отображения в селектбоксе
 ALIASED_MODEL_OPTIONS = [ALIAS_MAP.get(model, model) for model in AI_MODEL_OPTIONS]
-
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 
 # --- LOAD CSS ---
 with open(css_file) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
 
 with st.sidebar:
     selected_lang = option_menu(
@@ -57,38 +55,10 @@ with st.sidebar:
                     menu_icon="cast",
                     default_index=0,
                     orientation=None,
-                    #visibility: 'hidden'
-                    
                     styles=HEADER_STYLES)
 
-        
-    selected_lang
-
-
-#st.markdown("""
-    #<style>
-        #section[data-testid="stSidebar"][aria-expanded="true"]{
-            #display: none;
-        #}
-    #</style>
-   # """, unsafe_allow_html=True)
-
-
-
-
-
-
-
-hide_streamlit_style = """
-            <style>
-            [data-testid="stToolbar"] {visibility: hidden !important;}
-            footer {visibility: hidden !important;}
-            section[data-testid="stSidebar"][aria-expanded="true"]{
-            display: none;
-        }
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+# Сделать обратное отображение псевдонимов на исходные имена моделей
+REVERSE_ALIAS_MAP = {v: k for k, v in ALIAS_MAP.items()}
 
 # Storing The Context
 if "locale" not in st.session_state:
@@ -114,6 +84,7 @@ if "total_tokens" not in st.session_state:
 def main() -> None:
     c1, c2 = st.columns(2)
     with c1, c2:
+        # Использование псевдонимов моделей в селектбоксе
         c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=ALIASED_MODEL_OPTIONS)
         st.session_state.input_kind = c2.radio(
             label=st.session_state.locale.input_kind,
@@ -175,3 +146,4 @@ def run_agi():
 
 if __name__ == "__main__":
     run_agi()
+
