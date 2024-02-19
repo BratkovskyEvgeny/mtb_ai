@@ -76,13 +76,13 @@ with st.sidebar:
 #st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
-st.markdown("""
-    <style>
-        section[data-testid="stSidebar"][aria-expanded="true"]{
-            display: none;
-        }
-    </style>
-    """, unsafe_allow_html=True)
+#st.markdown("""
+    #<style>
+        #section[data-testid="stSidebar"][aria-expanded="true"]{
+            #display: none;
+        #}
+    #</style>
+    #""", unsafe_allow_html=True)
     
     
 #selected_lang = option_menu(
