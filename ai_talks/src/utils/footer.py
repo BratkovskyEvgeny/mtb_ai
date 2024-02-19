@@ -29,7 +29,7 @@ def show_info(icon: Path) -> None:
         #- {render_svg(icon)} [{st.session_state.locale.footer_channel}](https://https://t.me/Br_Evgeny)
        
     #""", unsafe_allow_html=True)
-    st.markdown('<div style="text-align: justify;">Нами был разработан прототип ЦАР-ассистента - помощника на основе искусственного интеллекта. ЦАР-ассистент успешно справляется с задачами, связанными с генерацией программного кода, код-ревью и в настоящее время обучается на доступных в сети Интернет правовых актах банковской тематики. Мы уверены, что ЦАР-ассистент станет надежным помощником для решения рутинных задач в ЗАО "МТБанк".</div>', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: justify;">Нами был разработан прототип ЦАР-бота - ассистента на основе искусственного интеллекта. ЦАР-бот успешно справляется с задачами, связанными с генерацией программного кода, код-ревью и в настоящее время обучается на доступных в сети Интернет правовых актах, связанных с банковской тематикой. Мы уверены, что ЦАР-бот станет надежным помощником для решения рутинных задач в ЗАО "МТБанк".</div>', unsafe_allow_html=True)
     #st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.responsibility_denial}</div>", unsafe_allow_html=True)
     st.divider()
     st.markdown('<div style="text-align: center;">С уважением, команда ЦАР</div>', unsafe_allow_html=True)
