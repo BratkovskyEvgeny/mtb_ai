@@ -48,7 +48,7 @@ with st.sidebar:
                     default_index=0,
                     orientation=None,
                     #visibility: 'hidden'
-                    
+                    key=6,
                     styles=HEADER_STYLES)
 
         
