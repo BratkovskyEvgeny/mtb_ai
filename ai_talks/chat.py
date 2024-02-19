@@ -13,12 +13,6 @@ import base64
 from io import BytesIO
 import requests
 
-
-
-
-#st.Image("ai_face4.png")
-
-
 # --- PATH SETTINGS ---
 current_dir: Path = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file: Path = current_dir / "src/styles/.css"
@@ -27,12 +21,7 @@ icons_dir: Path = assets_dir / "icons"
 img_dir: Path = assets_dir / "img"
 tg_svg: Path = icons_dir / "tg.svg"
 
-
-
 # --- GENERAL SETTINGS ---
-#PAGE_TITLE: str = "ЦАР_Ассистент"
-#PAGE_ICON: str = ""
-#LANG_EN: str = "En"
 LANG_RU: str = "Ru"
 AI_MODEL_OPTIONS: list[str] = [
     "gpt-4-1106-preview",
@@ -44,9 +33,6 @@ AI_MODEL_OPTIONS: list[str] = [
     "gpt-3.5-turbo-16k",
 ]
 
-#st.set_page_config(page_title=PAGE_TITLE)#PAGE_TITLE , page_icon=PAGE_ICON
-
-# --- LOAD CSS ---
 with open(css_file) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
@@ -58,43 +44,9 @@ with st.sidebar:
                     menu_icon="cast",
                     default_index=0,
                     orientation=None,
-                    #visibility: 'hidden'
-                    
                     styles=HEADER_STYLES)
 
-        
-    selected_lang
-##MainMenu {visibility: hidden;}
-#hide_streamlit_style = """  
-#<style>
-
-#footer {visibility: hidden;}
-#sidebar {visibility: hidden;}
-#</style>
-
-#"""
-#st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-
-
-st.markdown("""
-    <style>
-        section[data-testid="stSidebar"][aria-expanded="true"]{
-            display: none;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    
-#selected_lang = option_menu(
-    #menu_title=None,
-    #options=[LANG_RU, ],#LANG_EN, 
-    #icons=["globe2", "translate"],
-    #menu_icon="cast",
-    #default_index=0,
-    #orientation=None,
-    #visibility: 'hidden'
-    #styles=HEADER_STYLES
-#)
+    selected_model = st.selectbox(label="Выберите модель", options=AI_MODEL_OPTIONS, index=2)  # gpt-4 by default
 
 # Storing The Context
 if "locale" not in st.session_state:
@@ -120,7 +72,6 @@ if "total_tokens" not in st.session_state:
 def main() -> None:
     c1, c2 = st.columns(2)
     with c1, c2:
-        c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
         st.session_state.input_kind = c2.radio(
             label=st.session_state.locale.input_kind,
             options=(st.session_state.locale.input_kind_1, st.session_state.locale.input_kind_2),
@@ -167,18 +118,5 @@ def run_agi():
         orientation="horizontal",
         styles=FOOTER_STYLES
     )
-    match selected_footer:
-        case st.session_state.locale.footer_option0:
-            
-            main()
-        #case st.session_state.locale.footer_option1:
-            #st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
-            #show_info(tg_svg)
-        #case st.session_state.locale.footer_option2:
-            #show_donates()
-        #case _:
-            #show_info(tg_svg)
+    match selected_footer
 
-
-if __name__ == "__main__":
-    run_agi()
