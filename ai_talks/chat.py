@@ -118,7 +118,7 @@ if "total_tokens" not in st.session_state:
 
 
 def main() -> None:
-    c1, c2 = st.columns(2)
+    c1, c2 = st.sidebar.columns(2)
     with c1, c2:
         c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
         st.session_state.input_kind = c2.radio(
