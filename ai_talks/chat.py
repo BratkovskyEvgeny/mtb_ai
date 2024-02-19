@@ -22,13 +22,7 @@ PAGE_TITLE: str = "MTBankAI"
 PAGE_ICON: str = "🤖"
 LANG_EN: str = "En"
 LANG_RU: str = "Ru"
-AI_MODELS = {
-    "mtbank-cv": "gpt-4-vision-preview",
-    "mtbank": "gpt-4",
-}
-
-# Список фактических имен моделей
-AI_MODEL_OPTIONS = list(AI_MODELS.values())
+AI_MODEL = "gpt-4"  # Оставляем только одну модель
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 
@@ -70,10 +64,7 @@ if "total_tokens" not in st.session_state:
 def main() -> None:
     c1, c2 = st.columns(2)
     with c1, c2:
-        # Выводим псевдонимы моделей в селектбоксе
-        selected_model_alias = st.selectbox('Модель', list(AI_MODELS.keys()))
-        # Получаем фактическое имя модели из псевдонима
-        selected_model = AI_MODELS[selected_model_alias]
+        # Скрываем селектбокс для выбора модели
         st.session_state.input_kind = c2.radio(
             label=st.session_state.locale.input_kind,
             options=(st.session_state.locale.input_kind_1, st.session_state.locale.input_kind_2),
@@ -112,9 +103,8 @@ def run_agi():
         options=[
             st.session_state.locale.footer_option1,
             st.session_state.locale.footer_option0,
-           # st.session_state.locale.footer_option2,
         ],
-        icons=["info-circle", "chat-square-text"],  # https://icons.getbootstrap.com/
+        icons=["info-circle", "chat-square-text"],
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",
@@ -126,11 +116,8 @@ def run_agi():
         case st.session_state.locale.footer_option1:
             st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
             show_info(tg_svg)
-        #case st.session_state.locale.footer_option2:
-            #show_donates()
-        case _:
-            show_info(tg_svg)
 
 
 if __name__ == "__main__":
     run_agi()
+
