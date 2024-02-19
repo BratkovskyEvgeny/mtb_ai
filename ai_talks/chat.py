@@ -157,11 +157,11 @@ def run_agi():
     selected_footer = option_menu(
         menu_title=None,
         options=[
-            #st.session_state.locale.footer_option1,
+            st.session_state.locale.footer_option1,
             st.session_state.locale.footer_option0,
            # st.session_state.locale.footer_option2,
         ],
-        icons=["chat-square-text"],  # https://icons.getbootstrap.com/#"info-circle", "chat-square-text", "piggy-bank"
+        icons=["info-circle", "chat-square-text"],  # https://icons.getbootstrap.com/#"info-circle", "chat-square-text", "piggy-bank"
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",
@@ -171,13 +171,13 @@ def run_agi():
         case st.session_state.locale.footer_option0:
             
             main()
-        #case st.session_state.locale.footer_option1:
-            #st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
-            #show_info(tg_svg)
+        case st.session_state.locale.footer_option1:
+            st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
+            show_info(tg_svg)
         #case st.session_state.locale.footer_option2:
             #show_donates()
-        #case _:
-            #show_info(tg_svg)
+        case _:
+            show_info(tg_svg)
 
 
 if __name__ == "__main__":
