@@ -53,6 +53,7 @@ with st.sidebar:
 
         
     selected_lang
+    selected_model = st.selectbox(label="Выберите модель", options=AI_MODEL_OPTIONS, index=2)
 
 
 #st.markdown("""
