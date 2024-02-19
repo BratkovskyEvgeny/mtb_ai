@@ -8,6 +8,16 @@ from src.utils.footer import show_donates, show_info
 from src.utils.helpers import get_files_in_dir, get_random_img
 from src.utils.lang import en, ru
 from streamlit_option_menu import option_menu
+from PIL import Image
+import base64
+from io import BytesIO
+import requests
+
+
+
+
+#st.Image("ai_face4.png")
+
 
 # --- PATH SETTINGS ---
 current_dir: Path = Path(__file__).parent if "__file__" in locals() else Path.cwd()
@@ -17,10 +27,12 @@ icons_dir: Path = assets_dir / "icons"
 img_dir: Path = assets_dir / "img"
 tg_svg: Path = icons_dir / "tg.svg"
 
+
+
 # --- GENERAL SETTINGS ---
-PAGE_TITLE: str = "MTBankAI"
-PAGE_ICON: str = "🤖"
-LANG_EN: str = "En"
+#PAGE_TITLE: str = "ЦАР_Ассистент"
+#PAGE_ICON: str = ""
+#LANG_EN: str = "En"
 LANG_RU: str = "Ru"
 AI_MODEL_OPTIONS: list[str] = [
     "gpt-4-1106-preview",
@@ -32,12 +44,11 @@ AI_MODEL_OPTIONS: list[str] = [
     "gpt-3.5-turbo-16k",
 ]
 
-st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
+#st.set_page_config(page_title=PAGE_TITLE)#PAGE_TITLE , page_icon=PAGE_ICON
 
 # --- LOAD CSS ---
 with open(css_file) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
 
 with st.sidebar:
     selected_lang = option_menu(
@@ -48,37 +59,42 @@ with st.sidebar:
                     default_index=0,
                     orientation=None,
                     #visibility: 'hidden'
-                    key=6,
+                    
                     styles=HEADER_STYLES)
 
         
     selected_lang
+##MainMenu {visibility: hidden;}
+#hide_streamlit_style = """  
+#<style>
+
+#footer {visibility: hidden;}
+#sidebar {visibility: hidden;}
+#</style>
+
+#"""
+#st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 
-#st.markdown("""
-    #<style>
-        #section[data-testid="stSidebar"][aria-expanded="true"]{
-            #display: none;
-        #}
-    #</style>
-   # """, unsafe_allow_html=True)
-
-
-
-
-
-
-
-hide_streamlit_style = """
-            <style>
-            [data-testid="stToolbar"] {visibility: hidden !important;}
-            footer {visibility: hidden !important;}
-            section[data-testid="stSidebar"][aria-expanded="true"]{
+st.markdown("""
+    <style>
+        section[data-testid="stSidebar"][aria-expanded="true"]{
             display: none;
         }
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+    </style>
+    """, unsafe_allow_html=True)
+    
+    
+#selected_lang = option_menu(
+    #menu_title=None,
+    #options=[LANG_RU, ],#LANG_EN, 
+    #icons=["globe2", "translate"],
+    #menu_icon="cast",
+    #default_index=0,
+    #orientation=None,
+    #visibility: 'hidden'
+    #styles=HEADER_STYLES
+#)
 
 # Storing The Context
 if "locale" not in st.session_state:
@@ -141,11 +157,11 @@ def run_agi():
     selected_footer = option_menu(
         menu_title=None,
         options=[
-            st.session_state.locale.footer_option1,
+            #st.session_state.locale.footer_option1,
             st.session_state.locale.footer_option0,
            # st.session_state.locale.footer_option2,
         ],
-        icons=["info-circle", "chat-square-text"],  # https://icons.getbootstrap.com/
+        icons=["chat-square-text"],  # https://icons.getbootstrap.com/#"info-circle", "chat-square-text", "piggy-bank"
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",
@@ -153,21 +169,17 @@ def run_agi():
     )
     match selected_footer:
         case st.session_state.locale.footer_option0:
+            
             main()
-        case st.session_state.locale.footer_option1:
-            st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
-            show_info(tg_svg)
+        #case st.session_state.locale.footer_option1:
+            #st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
+            #show_info(tg_svg)
         #case st.session_state.locale.footer_option2:
             #show_donates()
-        case _:
-            show_info(tg_svg)
+        #case _:
+            #show_info(tg_svg)
 
 
 if __name__ == "__main__":
     run_agi()
-
-
-if __name__ == "__main__":
-    run_agi()
-
 
