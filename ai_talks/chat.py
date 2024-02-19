@@ -22,19 +22,13 @@ PAGE_TITLE: str = "MTBankAI"
 PAGE_ICON: str = "🤖"
 LANG_EN: str = "En"
 LANG_RU: str = "Ru"
-AI_MODEL_OPTIONS: list[str] = [
-    "gpt-4-vision-preview",
-    "gpt-4",
-]
-
-# Определение словаря с псевдонимами моделей
-ALIAS_MAP = {
-    "gpt-4-vision-preview": "mtbank-cv",
-    "gpt-4": "mtbank",
+AI_MODELS = {
+    "mtbank-cv": "gpt-4-vision-preview",
+    "mtbank": "gpt-4",
 }
 
-# Преобразование списка моделей в список псевдонимов для отображения в селектбоксе
-ALIASED_MODEL_OPTIONS = [ALIAS_MAP.get(model, model) for model in AI_MODEL_OPTIONS]
+# Список фактических имен моделей
+AI_MODEL_OPTIONS = list(AI_MODELS.values())
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 
@@ -51,9 +45,6 @@ with st.sidebar:
                     default_index=0,
                     orientation=None,
                     styles=HEADER_STYLES)
-
-# Сделать обратное отображение псевдонимов на исходные имена моделей
-REVERSE_ALIAS_MAP = {v: k for k, v in ALIAS_MAP.items()}
 
 # Storing The Context
 if "locale" not in st.session_state:
@@ -79,8 +70,10 @@ if "total_tokens" not in st.session_state:
 def main() -> None:
     c1, c2 = st.columns(2)
     with c1, c2:
-        # Использование псевдонимов моделей в селектбоксе
-        c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=ALIASED_MODEL_OPTIONS)
+        # Выводим псевдонимы моделей в селектбоксе
+        selected_model_alias = st.selectbox('Модель', list(AI_MODELS.keys()))
+        # Получаем фактическое имя модели из псевдонима
+        selected_model = AI_MODELS[selected_model_alias]
         st.session_state.input_kind = c2.radio(
             label=st.session_state.locale.input_kind,
             options=(st.session_state.locale.input_kind_1, st.session_state.locale.input_kind_2),
