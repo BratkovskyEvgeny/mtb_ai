@@ -33,7 +33,7 @@ def show_info(icon: Path) -> None:
     #st.markdown(f"<div style='text-align: justify;'>{st.session_state.locale.responsibility_denial}</div>", unsafe_allow_html=True)
     #st.markdown('<div style="text-align: justify;">С уважением, команда ЦАР</div>', unsafe_allow_html=True)
     #st.info('<div style="text-align: center;">С уважением, команда ЦАР</div>', unsafe_allow_html=True)
-    st.success('С уважением, команда ЦАР', icon="✅")
+    st.error('С уважением, команда ЦАР', icon="✅")
     st.divider()
     #st.markdown(f"project [repo on github]({REPO_URL}) waiting for your :star: | [report]({BUG_REPORT_URL}) a bug")
 
