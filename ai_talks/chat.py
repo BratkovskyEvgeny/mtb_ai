@@ -24,13 +24,23 @@ LANG_EN: str = "En"
 LANG_RU: str = "Ru"
 AI_MODEL_OPTIONS: list[str] = [
     #"gpt-4-1106-preview",
-    "gpt-4-vision-preview" as "mtbank-cv",#gpt-4-vision-preview
-    "gpt-4" as "mtbank",#gpt-4
+    "gpt-4-vision-preview",#gpt-4-vision-preview
+    "gpt-4",#gpt-4
     #"gpt-4-32k",
     #"gpt-3.5-turbo-1106",
     #"gpt-3.5-turbo",
     #"",#gpt-3.5-turbo-16k
 ]
+
+# Определение словаря с псевдонимами
+ALIAS_MAP = {
+    "gpt-4-vision-preview": "mtbank-cv",
+    "gpt-4": "mtbank",
+}
+
+# Преобразование списка моделей в список псевдонимов
+ALIASED_MODEL_OPTIONS = [ALIAS_MAP.get(model, model) for model in AI_MODEL_OPTIONS]
+
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
 
@@ -104,7 +114,7 @@ if "total_tokens" not in st.session_state:
 def main() -> None:
     c1, c2 = st.columns(2)
     with c1, c2:
-        c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
+        c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=ALIASED_MODEL_OPTIONS)
         st.session_state.input_kind = c2.radio(
             label=st.session_state.locale.input_kind,
             options=(st.session_state.locale.input_kind_1, st.session_state.locale.input_kind_2),
