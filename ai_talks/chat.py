@@ -8,6 +8,16 @@ from src.utils.footer import show_donates, show_info
 from src.utils.helpers import get_files_in_dir, get_random_img
 from src.utils.lang import en, ru
 from streamlit_option_menu import option_menu
+from PIL import Image
+import base64
+from io import BytesIO
+import requests
+
+
+
+
+#st.Image("ai_face4.png")
+
 
 # --- PATH SETTINGS ---
 current_dir: Path = Path(__file__).parent if "__file__" in locals() else Path.cwd()
@@ -17,14 +27,24 @@ icons_dir: Path = assets_dir / "icons"
 img_dir: Path = assets_dir / "img"
 tg_svg: Path = icons_dir / "tg.svg"
 
-# --- GENERAL SETTINGS ---
-PAGE_TITLE: str = "MTBankAI"
-PAGE_ICON: str = "🤖"
-LANG_EN: str = "En"
-LANG_RU: str = "Ru"
-AI_MODEL = "gpt-4"  # Оставляем только одну модель
 
-st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
+
+# --- GENERAL SETTINGS ---
+#PAGE_TITLE: str = "ЦАР_Ассистент"
+#PAGE_ICON: str = ""
+#LANG_EN: str = "En"
+LANG_RU: str = "Ru"
+AI_MODEL_OPTIONS: list[str] = [
+    "gpt-4-1106-preview",
+    "gpt-4-vision-preview",
+    "gpt-4",
+    "gpt-4-32k",
+    "gpt-3.5-turbo-1106",
+    "gpt-3.5-turbo",
+    "gpt-3.5-turbo-16k",
+]
+
+#st.set_page_config(page_title=PAGE_TITLE)#PAGE_TITLE , page_icon=PAGE_ICON
 
 # --- LOAD CSS ---
 with open(css_file) as f:
@@ -38,7 +58,43 @@ with st.sidebar:
                     menu_icon="cast",
                     default_index=0,
                     orientation=None,
+                    #visibility: 'hidden'
+                    
                     styles=HEADER_STYLES)
+
+        
+    selected_lang
+##MainMenu {visibility: hidden;}
+#hide_streamlit_style = """  
+#<style>
+
+#footer {visibility: hidden;}
+#sidebar {visibility: hidden;}
+#</style>
+
+#"""
+#st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+
+st.markdown("""
+    <style>
+        section[data-testid="stSidebar"][aria-expanded="true"]{
+            display: none;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    
+#selected_lang = option_menu(
+    #menu_title=None,
+    #options=[LANG_RU, ],#LANG_EN, 
+    #icons=["globe2", "translate"],
+    #menu_icon="cast",
+    #default_index=0,
+    #orientation=None,
+    #visibility: 'hidden'
+    #styles=HEADER_STYLES
+#)
 
 # Storing The Context
 if "locale" not in st.session_state:
@@ -64,7 +120,7 @@ if "total_tokens" not in st.session_state:
 def main() -> None:
     c1, c2 = st.columns(2)
     with c1, c2:
-        # Скрываем селектбокс для выбора модели
+        c1.selectbox(label=st.session_state.locale.select_placeholder1, key="model", options=AI_MODEL_OPTIONS)
         st.session_state.input_kind = c2.radio(
             label=st.session_state.locale.input_kind,
             options=(st.session_state.locale.input_kind_1, st.session_state.locale.input_kind_2),
@@ -101,10 +157,11 @@ def run_agi():
     selected_footer = option_menu(
         menu_title=None,
         options=[
-            st.session_state.locale.footer_option1,
+            #st.session_state.locale.footer_option1,
             st.session_state.locale.footer_option0,
+           # st.session_state.locale.footer_option2,
         ],
-        icons=["info-circle", "chat-square-text"],
+        icons=["chat-square-text"],  # https://icons.getbootstrap.com/#"info-circle", "chat-square-text", "piggy-bank"
         menu_icon="cast",
         default_index=0,
         orientation="horizontal",
@@ -112,12 +169,16 @@ def run_agi():
     )
     match selected_footer:
         case st.session_state.locale.footer_option0:
+            
             main()
-        case st.session_state.locale.footer_option1:
-            st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
-            show_info(tg_svg)
+        #case st.session_state.locale.footer_option1:
+            #st.image(f"{img_dir}/{get_random_img(get_files_in_dir(img_dir))}")
+            #show_info(tg_svg)
+        #case st.session_state.locale.footer_option2:
+            #show_donates()
+        #case _:
+            #show_info(tg_svg)
 
 
 if __name__ == "__main__":
     run_agi()
-
