@@ -24,12 +24,12 @@ LANG_EN: str = "En"
 LANG_RU: str = "Ru"
 AI_MODEL_OPTIONS: list[str] = [
     #"gpt-4-1106-preview",
-    "mtbank-cv",#gpt-4-vision-preview
-    "mtbank",#gpt-4
+    "gpt-4-vision-preview" as "mtbank-cv",#gpt-4-vision-preview
+    "gpt-4" as "mtbank",#gpt-4
     #"gpt-4-32k",
     #"gpt-3.5-turbo-1106",
     #"gpt-3.5-turbo",
-    "",#gpt-3.5-turbo-16k
+    #"",#gpt-3.5-turbo-16k
 ]
 
 st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON)
